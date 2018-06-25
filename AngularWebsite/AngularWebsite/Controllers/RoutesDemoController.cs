@@ -23,5 +23,11 @@ namespace AngularWebsite.Controllers
             return
                 View();
         }
+
+        public ActionResult Four()
+        {
+            return
+                View();
+        }
     }
 }

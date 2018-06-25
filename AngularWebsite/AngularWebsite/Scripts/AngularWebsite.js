@@ -1,4 +1,4 @@
-﻿var AngularWebsite = angular.module('AngularWebsite', ['ngRoute']);
+﻿var AngularWebsite = angular.module('AngularWebsite', ['ui.router', 'ui.bootstrap']);
 
 AngularWebsite.controller('LandingPageController', LandingPageController);
 AngularWebsite.controller('LoginController', LoginController);
@@ -8,28 +8,63 @@ AngularWebsite.factory('AuthHttpResponseInterceptor', AuthHttpResponseIntercepto
 AngularWebsite.factory('LoginFactory', LoginFactory);
 AngularWebsite.factory('RegistrationFactory', RegistrationFactory);
 
-var configFunction = function ($routeProvider, $httpProvider) {
-    $routeProvider.
-        when('/routeOne', {
-            templateUrl: 'routesDemo/one'
+var configFunction = function ($stateProvider, $httpProvider, $locationProvider) {
+
+    $locationProvider.hashPrefix('!').html5Mode(true);
+
+    $stateProvider
+        .state('stateOne', {
+            url: '/stateOne?donuts',
+            views: {
+                "containerOne": {
+                    templateUrl: '/routesDemo/one'
+                },
+                "containerTwo": {
+                    templateUrl: function (params) { return '/routesDemo/two?donuts=' + params.donuts; }
+                },
+                "nestedView@stateOne": {
+                    templateUrl: '/routesDemo/four'
+                }
+            }
         })
-        .when('/routeTwo/:donuts', {
-            templateUrl: function (params) { return '/routesDemo/two?donuts=' + params.donuts; }
+        .state('stateTwo', {
+            url: '/stateTwo',
+            views: {
+                "containerOne": {
+                    templateUrl: '/routesDemo/one'
+                },
+                "containerTwo": {
+                    templateUrl: '/routesDemo/three'
+                }
+            }
         })
-        .when('/routeThree', {
-            templateUrl: 'routesDemo/three'
+        .state('stateThree', {
+            url: '/stateThree?donuts',
+            views: {
+                "containerOne": {
+                    templateUrl: function (params) { return '/routesDemo/two?donuts=' + params.donuts; }
+                },
+                "containerTwo": {
+                    templateUrl: '/routesDemo/three'
+                }
+            }
         })
-        .when('/login', {
-            templateUrl: '/Account/Login',
-            controller: LoginController
-        })
-        .when('/register', {
-            templateUrl: '/Account/Register',
-            controller: RegisterController
+        .state('loginRegister', {
+            url: '/loginRegister?returnUrl',
+            views: {
+                "containerOne": {
+                    templateUrl: '/Account/Login',
+                    controller: LoginController
+                },
+                "containerTwo": {
+                    templateUrl: '/Account/Register',
+                    controller: RegisterController
+                }
+            }
         });
 
     $httpProvider.interceptors.push('AuthHttpResponseInterceptor');
 }
-configFunction.$inject = ['$routeProvider', '$httpProvider'];
+configFunction.$inject = ['$stateProvider', '$httpProvider', '$locationProvider'];
 
 AngularWebsite.config(configFunction);

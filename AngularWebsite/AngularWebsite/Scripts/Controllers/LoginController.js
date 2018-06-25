@@ -1,9 +1,9 @@
-﻿var LoginController = function ($scope, $routeParams, $location, LoginFactory) {
+﻿var LoginController = function ($scope, $stateParams, $location, LoginFactory) {
     $scope.loginForm = {
         emailAddress: '',
         password: '',
         rememberMe: false,
-        returnUrl: $routeParams.returnUrl
+        returnUrl: $stateParams.returnUrl
     };
 
     $scope.login = function () {
@@ -22,4 +22,4 @@
     }
 }
 
-LoginController.$inject = ['$scope', '$routeParams', '$location', 'LoginFactory'];
+LoginController.$inject = ['$scope', '$stateParams', '$location', 'LoginFactory'];
