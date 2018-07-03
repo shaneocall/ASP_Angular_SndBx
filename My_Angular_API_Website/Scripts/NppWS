@@ -1,0 +1,20 @@
+<NotepadPlus>
+    <Project name="Angular_ASP">
+        <Folder name="Scripts">
+            <Folder name="Controllers">
+                <File name="Controllers\BaseController.js" />
+                <File name="Controllers\LoginController.js" />
+            </Folder>
+            <Folder name="Factories">
+                <File name="Factories\LoginFactory.js" />
+                <File name="Factories\RegisterFactory.js" />
+            </Folder>
+            <Folder name="Services">
+                <File name="Services\SessionService.js" />
+            </Folder>
+            <File name="AwesomeAngularWebApp.js" />
+        </Folder>
+        <Folder name="Styles" />
+        <File name="C:\Github\ASP_Angular_SndBx\My_Angular_API_Website\index.html" />
+    </Project>
+</NotepadPlus>
