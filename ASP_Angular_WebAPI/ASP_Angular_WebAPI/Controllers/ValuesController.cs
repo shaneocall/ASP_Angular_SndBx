@@ -7,13 +7,14 @@ using System.Web.Http;
 
 namespace ASP_Angular_WebAPI.Controllers
 {
+    //[Authorize(Roles = "SuperAdmin")]
     [Authorize]
     public class ValuesController : ApiController
     {
         // GET api/values
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Laura", "Shane" };
         }
 
         // GET api/values/5
